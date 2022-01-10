@@ -12,7 +12,7 @@ export const JogadorSchema = new mongoose.Schema(
       unique: true,
     },
     nome: {
-      type: Number,
+      type: String,
       required: true,
     },
     ranking: {

@@ -12,8 +12,8 @@ export class JogadoresController {
     @Post()
     async criarAtualizarJogador(
         @Body() criarJogadorDto: CriarJogadorDto
-    ){
-      await this.jogadoresService.criarAtualizarJogador(criarJogadorDto)
+    ): Promise<Jogador | any> {
+      return await this.jogadoresService.criarAtualizarJogador(criarJogadorDto)
     }
     // @Get()
     // async jogadorPorEmail(
