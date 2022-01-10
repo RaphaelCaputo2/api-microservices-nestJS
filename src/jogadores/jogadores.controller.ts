@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier */
-import { Body, Controller, Delete, Get, Post, Query } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Post, Query, UsePipes, ValidationPipe } from '@nestjs/common';
 import { CriarJogadorDto } from './dtos/criar-jogador.dto';
 import { Jogador } from './interface/jogador.interface';
 import { JogadoresService } from './jogadores.service';
@@ -10,10 +10,16 @@ export class JogadoresController {
 
 
     @Post()
+    @UsePipes(ValidationPipe)
     async criarAtualizarJogador(
         @Body() criarJogadorDto: CriarJogadorDto
-    ): Promise<Jogador | any> {
-      return await this.jogadoresService.criarAtualizarJogador(criarJogadorDto)
+    ): Promise<Jogador | Error> {
+      try{
+        return await this.jogadoresService.criarAtualizarJogador(criarJogadorDto)
+      }catch(error){
+       throw new Error(error.message);
+      }
+     
     }
     // @Get()
     // async jogadorPorEmail(
