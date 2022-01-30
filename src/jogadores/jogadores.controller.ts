@@ -1,5 +1,6 @@
 /* eslint-disable prettier/prettier */
 import { Body, Controller, Delete, Get, Param, Post, Put, UsePipes, ValidationPipe } from '@nestjs/common';
+import { AtualizarJogadorDto } from './dtos/atualizar-jogador.dto';
 import { CriarJogadorDto } from './dtos/criar-jogador.dto';
 import { Jogador } from './interface/jogador.interface';
 import { JogadoresService } from './jogadores.service';
@@ -21,10 +22,10 @@ export class JogadoresController {
     @Put('/:_id')
     @UsePipes(ValidationPipe)
     async AtualizarJogador(
-        @Body() criarJogadorDto: CriarJogadorDto,
+        @Body() atualizarJogadorDto: AtualizarJogadorDto,
         @Param('_id', JogadoresValidacaoParametrosPipe, ValidarIdMongoose) _id: string): Promise<void> {
       try{
-        return await this.jogadoresService.atualizarJogador( _id, criarJogadorDto)
+        return await this.jogadoresService.atualizarJogador( _id, atualizarJogadorDto)
       }catch(error){
        throw new Error(error.message);
       }

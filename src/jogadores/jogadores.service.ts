@@ -8,6 +8,7 @@ import { Jogador } from './interface/jogador.interface';
 // import { v4 as uuidv4 } from 'uuid';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
+import { AtualizarJogadorDto } from './dtos/atualizar-jogador.dto';
 @Injectable()
 export class JogadoresService {
   constructor(
@@ -28,14 +29,14 @@ export class JogadoresService {
   }
   async atualizarJogador(
     _id: string,
-    criarJogadorDto: CriarJogadorDto,
+    atualizarJogador: AtualizarJogadorDto,
   ): Promise<void> {
     const jogadorEncontrado = await this.encontrarJogador(_id);
 
     if (!jogadorEncontrado)
       throw new BadRequestException('Esse jogador não existe');
 
-    return await this.atualizar(criarJogadorDto, _id);
+    await this.atualizar(atualizarJogador, _id);
   }
 
   async consultarTodosJogadores(): Promise<Jogador[]> {
@@ -65,11 +66,11 @@ export class JogadoresService {
     return this.jogadorModel.findOne({ _id }).exec();
   }
   private async atualizar(
-    criarJogadorDto: CriarJogadorDto,
+    atualizarJogadorDto: AtualizarJogadorDto,
     _id: string,
-  ): Promise<any> {
-    return await this.jogadorModel
-      .findByIdAndUpdate({ _id }, { $set: criarJogadorDto })
+  ): Promise<void> {
+    await this.jogadorModel
+      .findByIdAndUpdate({ _id }, { $set: atualizarJogadorDto })
       .exec();
   }
 }
