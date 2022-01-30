@@ -42,9 +42,9 @@ export class JogadoresService {
     return jogadorEncontrado;
   }
   async deletarJogador(email: string): Promise<any> {
-    const encontrarJogador = await this.jogadorModel
-      .findOne({ 'jogadorModel.user': email })
-      .exec();
+    if (!email) throw new NotFoundException('O Campo email é necessário');
+    const encontrarJogador = await this.jogadorModel.findOne({ email }).exec();
+    console.log(encontrarJogador);
     if (!encontrarJogador) {
       throw new NotFoundException('Jogador nao encontrado');
     } else {
