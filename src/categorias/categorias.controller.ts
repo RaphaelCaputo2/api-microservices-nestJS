@@ -23,7 +23,7 @@ export class CategoriasController {
   }
   @Get('/:categoria')
   async buscarCategoriaPorIs(
-    @Param('categoria') categoria: Categoria,
+    @Param('categoria') categoria: string,
   ): Promise<Categoria> {
     return await this.categoriasService.buscarCategoriaPorId(categoria);
   }

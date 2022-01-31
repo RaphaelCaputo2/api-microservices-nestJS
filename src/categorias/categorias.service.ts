@@ -43,7 +43,7 @@ export class CategoriasService {
 
     return categoriaCriada;
   }
-  async buscarCategoriaPorId(categoria: Categoria): Promise<Categoria> {
+  async buscarCategoriaPorId(categoria: string): Promise<Categoria> {
     const encontrandoCategoria = await this.categoriaModel
       .findOne({
         categoria,
@@ -93,6 +93,23 @@ export class CategoriasService {
     encontrarCategoria.jogadores.push(idJogador);
     await this.categoriaModel
       .findOneAndUpdate({ categoria }, { $set: encontrarCategoria })
+      .exec();
+  }
+  async buscarCategoriaPorJogador(idJogador: any): Promise<any> {
+    const jogadores = await this.jogadoresService.consultarTodosJogadores();
+
+    const jogadorFilter = jogadores.filter(
+      (jogador) => jogador._id == idJogador,
+    );
+
+    if (jogadorFilter.length == 0) {
+      throw new BadRequestException(`O id ${idJogador} não é um jogador!`);
+    }
+
+    return await this.categoriaModel
+      .findOne()
+      .where('jogadores')
+      .in(idJogador)
       .exec();
   }
 }
