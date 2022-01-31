@@ -11,7 +11,8 @@
 Api criada para treinar microserviços utilizando nestJs e RabbitMq com nestJs
 Abaixo mostro como está a estrutura da API(Sempre será atualizada)
 
-31/01
+31/01 ( Ainda é monolito)
+
 ![image](./img/structure/2022-01-31_01-19.png)
 
 
