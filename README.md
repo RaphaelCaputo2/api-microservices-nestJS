@@ -18,3 +18,8 @@ Abaixo mostro como está a estrutura da API(Sempre será atualizada)
 
 
 
+
+
+01/02 ( Preparando estrutura para microservices)
+
+![image](./img/structure/2022-01-31_23-43.png)
